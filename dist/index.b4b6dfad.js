@@ -27164,7 +27164,7 @@ const MainView = ()=>{
     //fills empty movie array with movies from api
     (0, _react.useEffect)(()=>{
         fetch("https://pacific-taiga-63279.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
-            const moviesFromApi = data.docs.map((doc)=>{
+            const moviesFromApi = data.map((doc)=>{
                 return {
                     id: doc.key,
                     title: doc.title,
