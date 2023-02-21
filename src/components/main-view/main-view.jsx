@@ -46,12 +46,11 @@ export const MainView = () => {
     );
 };
 
-//edit
 //define all props constraints
-// MovieCard.propTypes = {
-//     movie: PropTypes.shape({
-//         title: PropTypes.string.isRequired,
-//         director: PropTypes.string.isRequired
-//     }).isRequired,
-//     onMovieClick: PropTypes.func.isRequired
-// };
+MainView.propTypes = {
+    movie: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        director: PropTypes.string.isRequired
+    }).isRequired,
+    onMovieClick: PropTypes.func.isRequired
+};

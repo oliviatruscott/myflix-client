@@ -27206,17 +27206,17 @@ const MainView = ()=>{
         lineNumber: 35,
         columnNumber: 9
     }, undefined);
-}; //edit
- //define all props constraints
- // MovieCard.propTypes = {
- //     movie: PropTypes.shape({
- //         title: PropTypes.string.isRequired,
- //         director: PropTypes.string.isRequired
- //     }).isRequired,
- //     onMovieClick: PropTypes.func.isRequired
- // };
+};
 _s(MainView, "PO+XgOji7E32nFJj3H5UPLPJ7w4=");
 _c = MainView;
+//define all props constraints
+MainView.propTypes = {
+    movie: (0, _propTypesDefault.default).shape({
+        title: (0, _propTypesDefault.default).string.isRequired,
+        director: (0, _propTypesDefault.default).string.isRequired
+    }).isRequired,
+    onMovieClick: (0, _propTypesDefault.default).func.isRequired
+};
 var _c;
 $RefreshReg$(_c, "MainView");
 
@@ -27249,15 +27249,16 @@ const MovieCard = ({ movie , onMovieClick  })=>{
         lineNumber: 5,
         columnNumber: 9
     }, undefined);
-}; //define all props constraints for MovieCard
- // MovieCard.propTypes = {
- //     movie: PropTypes.shape({
- //         title: PropTypes.string.isRequired,
- //         director: PropTypes.string.isRequired
- //     }).isRequired,
- //     onMovieClick: PropTypes.func.isRequired
- // };
+};
 _c = MovieCard;
+//define all props constraints for MovieCard
+MovieCard.propTypes = {
+    movie: (0, _propTypesDefault.default).shape({
+        title: (0, _propTypesDefault.default).string.isRequired,
+        director: (0, _propTypesDefault.default).string.isRequired
+    }).isRequired,
+    onMovieClick: (0, _propTypesDefault.default).func.isRequired
+};
 var _c;
 $RefreshReg$(_c, "MovieCard");
 
@@ -28263,16 +28264,16 @@ const MovieView = ({ movie , onBackClick  })=>{
         lineNumber: 5,
         columnNumber: 9
     }, undefined);
-}; //edit
- //define all props constraints
- // MovieCard.propTypes = {
- //     movie: PropTypes.shape({
- //         title: PropTypes.string.isRequired,
- //         director: PropTypes.string.isRequired
- //     }).isRequired,
- //     onMovieClick: PropTypes.func.isRequired
- // };
+};
 _c = MovieView;
+//define all props constraints
+MovieView.propTypes = {
+    movie: (0, _propTypesDefault.default).shape({
+        title: (0, _propTypesDefault.default).string.isRequired,
+        director: (0, _propTypesDefault.default).string.isRequired
+    }).isRequired,
+    onMovieClick: (0, _propTypesDefault.default).func.isRequired
+};
 var _c;
 $RefreshReg$(_c, "MovieView");
 
