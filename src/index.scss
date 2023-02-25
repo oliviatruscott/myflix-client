@@ -1,5 +1,5 @@
-$color: steelblue;
+$primary: Indigo;
+$body-bg: Lavender;
 
-.my-flix {
-    color: $color;
-}
+//app custom modifiers come BEFORE bootstrap import line
+@import '~bootstrap/scss/bootstrap.scss';

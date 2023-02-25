@@ -1,12 +1,17 @@
 import { createRoot } from 'react-dom/client';
 import { MainView } from './components/main-view/main-view';
+import Container from 'react-bootstrap/Container';
 
-//import statement to indicate that you need to bundle './index.scss'
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./index.scss";
 
 //main component (will eventually use all the others)
 const App = () => {
-    return <MainView />;
+    return (
+        <Container>
+            <MainView />
+        </Container>
+    );
 };
 
 //finds root of your app
