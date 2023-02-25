@@ -28596,6 +28596,6 @@ $RefreshReg$(_c, "SignupView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","@parcel/transformer-js/src/esmodule-helpers.js":"iNVPw","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"27j6R","react":"21dqq"}],"lJZlQ":[function() {},{}]},["3FTje","3Vba8","d8Dch"], "d8Dch", "parcelRequireaec4")
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"iNVPw","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"27j6R"}],"lJZlQ":[function() {},{}]},["3FTje","3Vba8","d8Dch"], "d8Dch", "parcelRequireaec4")
 
 //# sourceMappingURL=index.b4b6dfad.js.map
