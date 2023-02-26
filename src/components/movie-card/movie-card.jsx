@@ -14,6 +14,11 @@ export const MovieCard = ({ movie }) => {
                         Open
                     </Button>
                 </Link>
+                <FavoriteIcon
+                    user={user}
+                    movie={movieData}
+                    updateUserOnFav={updateUserOnFav}
+                />
             </Card.Body>
         </Card>
     );
