@@ -6,15 +6,13 @@ export const SignupView = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const [birthday, setBirthday] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = {
             username: username,
             password: password,
-            email: email,
-            birthday: birthday
+            email: email
         };
         fetch("signup_url", { //change signup url with api address
             method: "POST",
