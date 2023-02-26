@@ -141,12 +141,3 @@ export const MainView = () => {
         </BrowserRouter>
     );
 };
-
-//define all props constraints
-MainView.propTypes = {
-    movie: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        director: PropTypes.string.isRequired
-    }).isRequired,
-    onMovieClick: PropTypes.func.isRequired
-};
