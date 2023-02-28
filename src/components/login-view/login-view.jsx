@@ -9,11 +9,11 @@ export const LoginView = ({ onLoggedIn }) => {
         //prevents default reload of entire page
         event.preventDefault();
         const data = {
-            username: username,
-            password: password
+            Username: username,
+            Password: password
         };
         fetch("https://pacific-taiga-63279.herokuapp.com/login", {
-            methon: "POST",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
