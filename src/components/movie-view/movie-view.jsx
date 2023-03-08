@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 
 export const MovieView = ({ movies }) => {
     const { movieId } = useParams();
-    const movie = movie.find((b) => movie.id === movieId);
+    const movie = movies.find((movie) => movie.id === movieId);
 
     return (
         <>

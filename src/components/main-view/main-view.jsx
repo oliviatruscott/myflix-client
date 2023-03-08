@@ -1,46 +1,54 @@
 import { useEffect, useState } from "react";
-import { MovieCard } from "../movie-card/movie-card";
-import { MovieView } from "../movie-view/movie-view";
 import PropTypes from "prop-types";
-import { LoginView } from "../login-view/login-view";
-import { SignupView } from "../signup-view/signup-view";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { NavigationBar } from "../navigation-bar/navigation-bar";
-import { ProfileView } from "../profile-view/profile-view";
 import React from "react";
 
+//imports other components
+import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { ProfileView } from "../profile-view/profile-view";
+import { LoginView } from "../login-view/login-view";
+import { SignupView } from "../signup-view/signup-view";
+import { MovieCard } from "../movie-card/movie-card";
+import { MovieView } from "../movie-view/movie-view";
+
 export const MainView = () => {
-    const [movies, setMovies] = useState([]); //empty movie array for api
-    const [selectedMovie, setSelectedMovie] = useState(null);
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    const [user, setUser] = useState(storedUser? storedUser : null);
-    const [token, setToken] = useState(null);
+    const storedUsername = localStorage.getItem("username");
     const storedToken = localStorage.getItem("token");
+    const [movies, setMovies] = useState([]); //empty movie array for api
+    const [user, setUser] = useState({
+        username: "",
+        password: "",
+        email: "",
+        favoriteMovies: [],
+    });
+    const [token, setToken] = useState(null);
+    const [toggleFavorites, favoriteMovies] = useState([]);
     //fills empty movie array with movies from api
     useEffect(() => {
         if (!token) {
             return;
         }
         fetch("https://pacific-taiga-63279.herokuapp.com/movies", {
-            headers: { Authorization: `Bearer ${token}` }
+            headers: { Authorization: `Bearer ${token}` },
         })
-        .then((response) => response.json())
-        .then((data) => {
-            //double check that after : works and is correct
-            const moviesFromApi = data.map((movie) => {
-                return {
-                    id: movie.id,
-                    title: movie.title,
-                    description: movie.description,
-                    director: movie.directorName,
-                    genre: movie.genreName
-                };
+            .then((response) => response.json())
+            .then((data) => {
+                //double check that after : works and is correct
+                const moviesFromApi = data.map(movie => {
+                    return {
+                        id: movie.id,
+                        title: movie.title,
+                        description: movie.description,
+                        director: movie.directorName,
+                        genre: movie.genreName
+                    };
+                });
+                setMovies(moviesFromApi);
+                localStorage.setItem("movies", JSON.stringify(moviesFromApi))
             });
-            setMovies(moviesFromApi);
-        }, [token]);
-    }, []);
+    }, [token]);
     return (
         <BrowserRouter>
             <NavigationBar
@@ -71,50 +79,30 @@ export const MainView = () => {
                     element={
                         <React.Fragment>
                             {user ? (
-                                <Navigaate to="/" />
+                                <Navigate to="/" />
                             ) : (
                                 <Col md={5}>
-                                    <LoginView onLoggedIn={(user) => setUser(user)} />
-                                </Col>
-                            )}
-                        </React.Fragment>
-                    }
-                />
-                <Route 
-                    path="/movies/:movieId"
-                    element={
-                        <React.Fragment>
-                            {!user ? (
-                                <Navigate to="/login" />
-                            ) : movie.length === 0 ? (
-                                <Col>The list is empty!</Col>
-                            ) : (
-                                <Col md={8}>
-                                    <MovieView movie={movie} />
+                                    <LoginView onLoggedIn={(user, token) => {
+                                        setUser(user);
+                                        setToken(token);
+                                    }} />
                                 </Col>
                             )}
                         </React.Fragment>
                     }
                 />
                 <Route
-                    path="/"
+                    path="/movies/:movieId"
                     element={
                         <React.Fragment>
                             {!user ? (
-                                <Navigate to="/login" />
-                            ) : movie.length ===0 ? (
+                                <Navigate to="/login" replace />
+                            ) : movies.length === 0 ? (
                                 <Col>The list is empty!</Col>
                             ) : (
-                                <Row className="justify-content-center">
-                                    {movie.map((movie) => (
-                                        <MovieCard 
-                                            movie={movie}
-                                            isFavorite={favoriteMovies.includes(movie)}
-                                            toggleFavorite={toggleFavorites}
-                                            key={movie.id}
-                                        />
-                                    ))}
-                                </Row>
+                                <Col md={8}>
+                                    <MovieView movies={movies} username={user.username} favoriteMovies={user.favoriteMovies} />
+                                </Col>
                             )}
                         </React.Fragment>
                     }
@@ -124,15 +112,35 @@ export const MainView = () => {
                     element={
                         <React.Fragment>
                             {user ? (
+                                <Navigate to="/login" replace />
+                            ) : (
                                 <ProfileView
                                     user={user}
-                                    favoriteMovies={favoriteMovies}
-                                    toggleFavorites={toggleFavorite}
                                     token={token}
-                                    onDelete={clearLocalCurrentUser}
+                                    movies={movies}
                                 />
+                            )}
+                        </React.Fragment>
+                    }
+                />
+                <Route
+                    path="/"
+                    element={
+                        <React.Fragment>
+                            {!user ? (
+                                <Navigate to="/login" replace />
+                            ) : movies.length === 0 ? (
+                                <Col>The list is empty!</Col>
                             ) : (
-                                <Navigate to="/login" />
+                                <Row className="justify-content-center">
+                                    {movies.map((movie) => (
+                                        <MovieCard
+                                            movie={movie}
+                                            toggleFavorite={toggleFavorites}
+                                            key={movie.id}
+                                        />
+                                    ))}
+                                </Row>
                             )}
                         </React.Fragment>
                     }
