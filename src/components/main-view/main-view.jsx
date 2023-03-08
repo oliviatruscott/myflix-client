@@ -30,23 +30,23 @@ export const MainView = () => {
         if (!token) {
             return;
         }
-        fetch("https://pacific-taiga-63279.herokuapp.com/movies", {
+        fetch('https://pacific-taiga-63279.herokuapp.com/movies', {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((response) => response.json())
             .then((data) => {
-                //double check that after : works and is correct
-                const moviesFromApi = data.map(movie => {
+                console.log('data', data);
+                const moviesFromApi = data.map((movie) => {
                     return {
-                        id: movie.id,
+                        id: movie._id,
                         title: movie.title,
                         description: movie.description,
-                        director: movie.directorName,
-                        genre: movie.genreName
+                        director: movie.director.name,
+                        genre: movie.genre.name,
                     };
                 });
                 setMovies(moviesFromApi);
-                localStorage.setItem("movies", JSON.stringify(moviesFromApi))
+                localStorage.setItem('movies', JSON.stringify(moviesFromApi));
             });
     }, [token]);
     return (
