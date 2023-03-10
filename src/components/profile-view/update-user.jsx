@@ -27,14 +27,14 @@ export const UpdateView = ({ storedToken, storedUser }) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = {
-            Username: username,
-            Password: password,
-            Email: email,
+            username: username,
+            password: password,
+            email: email,
         };
         fetch(
-            `https://pacific-taiga-63279.herokuapp.com/users/${storedUser.Username}`,
+            `https://pacific-taiga-63279.herokuapp.com/users/${user.username}`,
             {
-                method: "PUT",
+                method: "GET",
                 body: JSON.stringify(data),
                 headers: {
                     Authorization: `Bearer ${token}`,
