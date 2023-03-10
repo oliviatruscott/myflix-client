@@ -1,30 +1,57 @@
 import { useParams } from 'react-router';
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
-export const MovieView = ({ movies }) => {
+export const MovieView = ({ movies, toggleFavorite, isFavorite }) => {
     const { movieId } = useParams();
     const movie = movies.find((movie) => movie.id === movieId);
-
+    //make sure favorites button/function works with profile view
+    const handleFavoriteClick = (event) => {
+        event.preventDefault();
+        toggleFavorite(movie);
+    };
     return (
         <>
             <Row className='d-flex flex-row-reverse p-3'>
-                <Col md={7} className='d-flex flex-column'>
-                    <Row className='d-flex flex-row  justify-content-between'>
-                        <Col md={9} className='d-flex flex-column'>
-                            <h3 className='my-0'>
-                                <span>Title: </span>
+                <Col md={6} className='d-flex flex-column'>
+                    <Row>
+                        <Col md={9} className='text-center'>
+                            <h1 className="display-6">
                                 <span>{movie.title}</span>
-                            </h3>
-                            <h5 className='mt-1 text-left text-muted'>
-                                <span>Director: </span>
-                                <span>{movie.director.name}</span>
+                            </h1>
+                            <h5 className="lead">
+                                <span>Description: </span>
+                                <span>{movie.description}</span>
                             </h5>
-                        </Col>
-
-                        <Col md={3} className='align-self-end mb-2 text-end'>
-                            <span>Genre: </span>
-                            <span className='fw-bolder'>{movie.genre.name}</span>
+                            <h5 className="lead">
+                                <span>Director: </span>
+                                <span>{movie.director}</span>
+                            </h5>
+                            <h5 className="lead">
+                                <span>Genre: </span>
+                                <span>{movie.genre}</span>
+                            </h5>
+                            <br></br>
+                            <div>
+                                <button type="button" className="btn btn-outline-danger" onClick={handleFavoriteClick}>
+                                    {isFavorite ? (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-heart" viewBox="0 0 16 16">
+                                            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                        </svg>
+                                    ) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-heart-fill" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                        </svg>
+                                    )}
+                                </button>
+                            </div>
+                            <br></br>
+                            <Link to={`/`}>
+                                <button varient="link" className="btn btn-outline-secondary">
+                                    Back
+                                </button>
+                            </Link>
                         </Col>
                     </Row>
                 </Col>
