@@ -6,17 +6,15 @@ export const SignupView = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    const [birthday, setBirthday] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = {
             username: username,
             password: password,
-            email: email,
-            birthday: birthday
+            email: email
         };
-        fetch("signup_url", { //change signup url with api address
+        fetch("https://pacific-taiga-63279.herokuapp.com/users", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
@@ -61,6 +59,7 @@ export const SignupView = () => {
                     required
                 />
             </Form.Group>
+            <br></br>
             <Button varent="primary" type="submit">
                 Submit
             </Button>
