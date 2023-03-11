@@ -27186,10 +27186,57 @@ const MainView = ()=>{
         username: "",
         password: "",
         email: "",
+        birthday: "",
         favoriteMovies: []
     });
     const [token, setToken] = (0, _react.useState)(null);
     const [toggleFavorites, favoriteMovies] = (0, _react.useState)([]);
+    const toggleFavorite = (movie)=>{
+        const index = favoriteMovies.indexOf(movie);
+        if (index > -1) {
+            deleteFavoriteMovie(movie);
+            setFavoriteMovies(favoriteMovies.filter((favoriteMovie)=>favoriteMovie.id !== movie.id));
+        } else {
+            addFavoriteMovie(movie);
+            setFavoriteMovies([
+                ...favoriteMovies,
+                movie
+            ]);
+        }
+    };
+    const deleteFavoriteMovie = async (movie)=>{
+        try {
+            const response = await fetch(`https://pacific-taiga-63279.herokuapp.com/users/${user.username}/movies/${movie.id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+            const { success , message , data  } = await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const addFavoriteMovie = async (movie)=>{
+        try {
+            const response = await fetch(`https://pacific-taiga-63279.herokuapp.com/users/${user.username}/movies/${movie.id}`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            });
+            const { success , message , data  } = await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const clearLocalCurrentUser = ()=>{
+        setusername(null);
+        setToken(null);
+        localStorage.clear();
+    };
     //fills empty movie array with movies from api
     (0, _react.useEffect)(()=>{
         if (!token) return;
@@ -27225,7 +27272,7 @@ const MainView = ()=>{
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 54,
+                lineNumber: 110,
                 columnNumber: 13
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Routes), {
@@ -27242,7 +27289,7 @@ const MainView = ()=>{
                         }, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 63,
+                        lineNumber: 119,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27262,7 +27309,7 @@ const MainView = ()=>{
                         }, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 77,
+                        lineNumber: 133,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27284,24 +27331,26 @@ const MainView = ()=>{
                         }, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 94,
+                        lineNumber: 150,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
                         path: "/profile",
                         element: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactDefault.default).Fragment, {
-                            children: user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
+                            children: user ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {
+                                user: user,
+                                favoriteMovies: favoriteMovies,
+                                toggleFavorite: toggleFavorite,
+                                token: token,
+                                onDelete: clearLocalCurrentUser
+                            }, void 0, false, void 0, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Navigate), {
                                 to: "/login",
                                 replace: true
-                            }, void 0, false, void 0, void 0) : /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _profileView.ProfileView), {
-                                user: user,
-                                token: token,
-                                movies: movies
                             }, void 0, false, void 0, void 0)
                         }, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 110,
+                        lineNumber: 166,
                         columnNumber: 17
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Route), {
@@ -27322,23 +27371,23 @@ const MainView = ()=>{
                         }, void 0, false, void 0, void 0)
                     }, void 0, false, {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 126,
+                        lineNumber: 184,
                         columnNumber: 17
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 62,
+                lineNumber: 118,
                 columnNumber: 13
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 53,
+        lineNumber: 109,
         columnNumber: 9
     }, undefined);
 };
-_s(MainView, "xUun4ElX5iD+yxd5TzPfQSpT5oI=");
+_s(MainView, "U9pwuFgDoh0dy7qsWIAlPBASlZ4=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -46278,7 +46327,7 @@ const ProfileView = ({ user , favoriteMovies , toggleFavorite , token , onDelete
                 body: JSON.stringify(userData),
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    "Content -Type": "application/json"
+                    "Content-Type": "application/json"
                 }
             });
             const { success , message , data  } = await response.json();
