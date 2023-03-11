@@ -21,10 +21,65 @@ export const MainView = () => {
         username: "",
         password: "",
         email: "",
+        birthday: "",
         favoriteMovies: [],
     });
     const [token, setToken] = useState(null);
     const [toggleFavorites, favoriteMovies] = useState([]);
+    const toggleFavorite = (movie) => {
+        const index = favoriteMovies.indexOf(movie);
+        if (index > -1) {
+            deleteFavoriteMovie(movie);
+            setFavoriteMovies(
+                favoriteMovies.filter((favoriteMovie) => favoriteMovie.id !== movie.id)
+            );
+        } else {
+            addFavoriteMovie(movie);
+            setFavoriteMovies([...favoriteMovies, movie]);
+        }
+    };
+
+    const deleteFavoriteMovie = async (movie) => {
+        try {
+            const response = await fetch(
+                `https://pacific-taiga-63279.herokuapp.com/users/${user.username}/movies/${movie.id}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            const { success, message, data } = await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    const addFavoriteMovie = async (movie) => {
+        try {
+            const response = await fetch(
+                `https://pacific-taiga-63279.herokuapp.com/users/${user.username}/movies/${movie.id}`,
+                {
+                    method: "POST",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+            const { success, message, data } = await response.json();
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const clearLocalCurrentUser = () => {
+        setusername(null);
+        setToken(null);
+        localStorage.clear();
+    };
+    
     //fills empty movie array with movies from api
     useEffect(() => {
         if (!token) {
@@ -49,6 +104,7 @@ export const MainView = () => {
                 localStorage.setItem('movies', JSON.stringify(moviesFromApi));
             });
     }, [token]);
+    
     return (
         <BrowserRouter>
             <NavigationBar
@@ -112,13 +168,15 @@ export const MainView = () => {
                     element={
                         <React.Fragment>
                             {user ? (
-                                <Navigate to="/login" replace />
-                            ) : (
                                 <ProfileView
                                     user={user}
+                                    favoriteMovies={favoriteMovies}
+                                    toggleFavorite={toggleFavorite}
                                     token={token}
-                                    movies={movies}
+                                    onDelete={clearLocalCurrentUser}
                                 />
+                            ) : (
+                                <Navigate to="/login" replace />
                             )}
                         </React.Fragment>
                     }
