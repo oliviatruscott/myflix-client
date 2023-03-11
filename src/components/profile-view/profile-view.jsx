@@ -35,7 +35,7 @@ export const ProfileView = ({ user, favoriteMovies, toggleFavorite, token, onDel
                 body: JSON.stringify(userData),
                 headers: {
                     Authorization: `Bearer ${token}`,
-                    "Content -Type": "application/json",
+                    "Content-Type": "application/json",
                 },
             });
             const { success, message, data } = await response.json();
