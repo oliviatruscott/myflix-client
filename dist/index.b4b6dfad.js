@@ -46288,7 +46288,7 @@ $RefreshReg$(_c, "ProfileView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","./update-user":"2SBwg","./user-info":"66eot","./favorite-movies":"dTTQH","./delete-user":"fKFLs","@parcel/transformer-js/src/esmodule-helpers.js":"iNVPw","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"27j6R"}],"2SBwg":[function(require,module,exports) {
+},{"react/jsx-dev-runtime":"iTorj","react":"21dqq","@parcel/transformer-js/src/esmodule-helpers.js":"iNVPw","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"27j6R","./update-user":"2SBwg","./user-info":"66eot","./favorite-movies":"dTTQH","./delete-user":"fKFLs"}],"2SBwg":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$95d1 = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -47350,6 +47350,6 @@ $RefreshReg$(_c, "MovieView");
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-dev-runtime":"iTorj","react-router":"dbWyW","react":"21dqq","react-bootstrap":"3AD9A","@parcel/transformer-js/src/esmodule-helpers.js":"iNVPw","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"27j6R","react-router-dom":"9xmpe"}],"i5LP7":[function() {},{}],"lJZlQ":[function() {},{}]},["3FTje","3Vba8","d8Dch"], "d8Dch", "parcelRequireaec4")
+},{"react/jsx-dev-runtime":"iTorj","react-router":"dbWyW","react":"21dqq","react-bootstrap":"3AD9A","react-router-dom":"9xmpe","@parcel/transformer-js/src/esmodule-helpers.js":"iNVPw","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"27j6R"}],"i5LP7":[function() {},{}],"lJZlQ":[function() {},{}]},["3FTje","3Vba8","d8Dch"], "d8Dch", "parcelRequireaec4")
 
 //# sourceMappingURL=index.b4b6dfad.js.map
