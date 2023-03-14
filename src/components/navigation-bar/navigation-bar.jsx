@@ -1,7 +1,5 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { createRoot } from "react-dom/client";
-import { MainView } from "../main-view/main-view";
 import Container from "react-bootstrap/Container";
 
 export const NavigationBar = ({ user, onLoggedOut }) => {
@@ -29,7 +27,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                                 <Nav.Link as={Link} to='/'>
                                     Home
                                 </Nav.Link>
-                                <Nav.Link as={Link} to={`/users/${user.Username}`}>
+                                <Nav.Link as={Link} to={`/users/${user.username}`}>
                                     Profile
                                 </Nav.Link>
                                 <Nav.Link onClick={onLoggedOut}>Sign out</Nav.Link>
