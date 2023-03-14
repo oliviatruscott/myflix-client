@@ -2,13 +2,28 @@ import { useParams } from 'react-router';
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import MovieCard from "../movie-card/movie-card";
+import { useEffect, useState } from "react";
 
-export const MovieView = ({ movies, toggleFavorite, isFavorite }) => {
+export const MovieView = ({ movies, toggleFav, isFavorite }) => {
     const { movieId } = useParams();
     const movie = movies.find((movie) => movie.id === movieId);
+    const [toggleFavorites, favoriteMovies] = useState([]);
+
     //make sure favorites button/function works with profile view
-    const handleFavoriteClick = (event) => {
-        event.preventDefault();
+    const toggleFavorite = (movie) => {
+        const index = favoriteMovies.indexOf(movie);
+        if (index > -1) {
+            deleteFavoriteMovie(movie);
+            setFavoriteMovies(
+                favoriteMovies.filter((favoriteMovie) => favoriteMovie.id !== movie.id)
+            );
+        } else {
+            addFavoriteMovie(movie);
+            setFavoriteMovies([...favoriteMovies, movie]);
+        }
+    };
+    const handleFavoriteClick = (movie) => {
         toggleFavorite(movie);
     };
     return (
