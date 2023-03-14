@@ -26,6 +26,7 @@ export const MainView = () => {
     });
     const [token, setToken] = useState(null);
     const [toggleFavorites, favoriteMovies] = useState([]);
+    
     const toggleFavorite = (movie) => {
         const index = favoriteMovies.indexOf(movie);
         if (index > -1) {
